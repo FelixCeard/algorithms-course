@@ -7,5 +7,6 @@ dependencies = [
     "fire>=0.7.1",
     "matplotlib>=3.10.6",
     "numpy>=2.2.6",
+    "tqdm>=4.67.1",
 ]
 requires-python = ">=3.10"

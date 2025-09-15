@@ -5,7 +5,7 @@ from matplotlib.colors import ListedColormap
 
 from src.schedule import Schedule
 
-def display_schedule(schedule: Schedule):
+def display_schedule(schedule: Schedule, save_to_file: bool = False):
     """
     Display jobs with their rewards and penalties using matplotlib.
     Uses white background, light blue for scheduled jobs, and red for assignments.
@@ -15,6 +15,8 @@ def display_schedule(schedule: Schedule):
         return
         
     max_time_step = schedule.time_steps
+
+    print(max_time_step)
 
     # create a grid with max_time_step columns and len(schedule.jobs) rows
     # 0 = white background, 1 = light blue (job time window), 2 = red (assignment)
@@ -57,7 +59,7 @@ def display_schedule(schedule: Schedule):
     ax.set_yticks(range(len(schedule.jobs)))
     yticklabels = []
     for job in schedule.jobs:
-        finished = job.progress == job.processing
+        finished = job.progress >= job.processing
         if finished:
             label = rf"($\bf{{{job.reward}}}$, -{job.penalty})"
         else:
@@ -74,4 +76,7 @@ def display_schedule(schedule: Schedule):
         ax.text(center_x, jobid, str(job.processing), ha='center', va='center', color='black', fontsize=10, fontweight='bold', bbox=dict(facecolor='white', edgecolor='none', alpha=0.7, boxstyle='round,pad=0.2'))
 
 
-    plt.show()
+    if save_to_file:
+        plt.savefig('schedule3.png')
+    else:
+        plt.show()

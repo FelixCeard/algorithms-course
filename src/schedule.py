@@ -1,4 +1,5 @@
 from src.job import Job
+import copy
 
 class Schedule:
     def __init__(self,
@@ -21,16 +22,36 @@ class Schedule:
         self.assignment = []
         # assignment is a list of tuples, where each tuple is the (time_step, job_id)
     
+    def score(self) -> int:
+        _score = 0
+        jobs = copy.deepcopy(self.jobs)
+        for (timestep, job_id) in self.assignment:
+            _job = jobs[job_id]
+            _job.progress += 1
+
+        for job in jobs:
+            if job.progress >= job.processing:
+                _score += job.reward
+            else:
+                _score -= job.penalty
+        return _score
+
     def jobs_from_file(self, file_path: str):
         with open(file_path, 'r') as file:
             content = file.readlines()
 
+        if content[0] == '1\n': # one machine, skipping line
+            content = content[1:]
+    
         num_jobs = int(content[0])
+
+        # print(content)
 
         self.jobs = []
 
         for i in range(1, len(content)):
             stats = content[i].replace('\n', '').split(', ')
+            # print(content[i])
             release = int(stats[0])-1
             deadline = int(stats[1])
             processing = int(stats[2])
@@ -38,7 +59,11 @@ class Schedule:
             penalty = int(stats[4])
             self.jobs.append(Job(release, deadline, processing, reward, penalty, id=i-1))
 
-        self.time_steps = max([job.deadline for job in self.jobs])
+        time_steps = max([job.deadline for job in self.jobs])
+        if self.time_steps is None or self.time_steps < time_steps:
+            self.time_steps = time_steps
+
+        assert len(self.jobs) == num_jobs
 
     def jobs_to_file(self, file_path: str):
         ...
@@ -49,7 +74,7 @@ class Schedule:
             content = file.readlines()
             
         self.assignment = []
-        for i in range(len(content)):
+        for i in range(len(content)-1):
             stats = content[i].replace('\n', '').split(', ')
 
             for j in stats:
@@ -58,8 +83,13 @@ class Schedule:
                 
                 self.assignment.append((int(j)-1, i))
                 self.jobs[i].progress += 1
+        
+        print(self.score())
+        # assert self.score() == int(content[-1])
 
 
 
     def schedule_to_file(self, file_path: str):
-        ...
+        with open(file_path, 'w') as file:
+            for time_step, job_id in self.assignment:
+                file.write(f"{time_step+1}, {job_id+1}\n")
