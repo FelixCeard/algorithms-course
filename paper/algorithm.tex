@@ -1,0 +1,40 @@
+\section{Algorithm}
+
+{
+\color{red}
+\textbf{This is the bare-bone formulation, it does not incorporate already scheduled jobs (timeslots) and push-back (penalty).}
+}
+
+
+\textbf{Integer Linear Program} for deciding upper bound in branch.
+\begin{align}
+    \max \quad & \sum_{i=1}^n r_i \cdot y_i \\
+    \text{s.t.} \quad & \sum_{t=1}^T x_{i, t} \geq y_i \cdot p_i \\
+    & \sum_{t=1}^T x_{i, t} \leq p_i  &\forall_i \in N \label{eq:optional}
+    \\
+    & \sum_{i=1}^N x_{i, t} = 1  &\forall_t \in [1, T] \\
+    & x_{i, t} \in \{0, 1\} & \forall_t \in [1, T] \forall_i \in N \\
+    & y_i \in \{0, 1\} & \forall_i \in N 
+    % & w_i \in \{0, 1\} & \forall_i \in N
+\end{align}
+where the variable $y_i$ denotes whether a job $i$ is completed (i.e. $\sum_{t=1}^T x_{i, t} \geq p_i$) and $x_{i, t}$ denotes whether we schedule job $i$ at timestep $t$. Note that the maximal timestep is $T$.
+
+Note that constraint (\ref{eq:optional}) is optional, as we might allow to schedule a job for longer. This would already be implicitly optimized for.
+
+\textbf{Relaxation.}
+\begin{align}
+    \max \quad & \sum_{i=1}^n r_i \cdot y_i \\
+    \text{s.t.} \quad & \sum_{t=1}^T x_{i, t} \geq y_i \cdot p_i \\
+    & \sum_{t=1}^T x_{i, t} \leq p_i  &\forall_i \in N \\
+    & \sum_{i=1}^N x_{i, t} = 1  &\forall_t \in [1, T] \\
+    & x_{i, t} \leq 1 & \forall_t \in [1, T] \forall_i \in N \\
+    & x_{i, t} \geq 0 & \forall_t \in [1, T] \forall_i \in N \\
+    & y_i \leq 1 & \forall_i \in N \\
+    & y_i \geq 0 & \forall_i \in N 
+    % & w_i \in \{0, 1\} & \forall_i \in N
+\end{align}
+which would provide us with an upper-bound for the branching.
+
+TODO: add formally with penalty to suffice formal definition
+
+\pagebreak

@@ -1,0 +1,66 @@
+\documentclass{article}
+% \usepackage{graphicx} % Required for inserting images
+% \usepackage{natbib}
+\usepackage{blindtext}
+\usepackage{tcolorbox}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{todonotes}
+\usepackage{arxiv}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{natbib}
+% \usepackage{amsthm}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\let\CheckCommand\providecommand
+\usepackage{microtype}      % microtypography
+\usepackage{lipsum}		% Can be removed after putting your text content
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{doi}
+\usepackage[english]{babel}
+
+\newtheorem{theorem}{Theorem}
+
+\title{Online Algorithm}
+\renewcommand{\shorttitle}{Online Algorithm}
+
+\author{Felix Céard-Falkenberg}
+
+\begin{document}
+\maketitle
+
+% \begin{abstract}
+% 	% \lipsum[1]
+% \end{abstract}
+
+
+\definecolor{mintbg}{rgb}{0.96862745147, 0.9333333333, 0.8352941176}
+\newenvironment{task}
+{%
+  \begin{tcolorbox}[width=\textwidth,
+                    colback=mintbg,
+                    title=What should we do in this section?,
+                    outer arc=0mm,
+                    colupper=black]%
+}%
+{%
+  \end{tcolorbox}%
+}
+
+
+\input{online.tex}
+% \input{algorithm}
+
+\bibliographystyle{apalike}
+\bibliography{ref.bib}
+% \bibliography{ref}
+
+\end{document}

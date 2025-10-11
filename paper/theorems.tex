@@ -1,0 +1,196 @@
+\section{Proof of Equivalence}
+
+% \textbf{Definitions}. 
+In the formal task description, each job $i$ in the set of jobs $N := \{1, \dots, n\}$ has the following properties:
+\begin{itemize}
+    \item[$r_i$] which denotes the release time of the job.
+    \item[$d_i$] which denotes the deadline of the job. Note that $d_i > r_i$.
+    \item[$p_i$] which denotes the processing time of the job.
+    \item[$w_i$] which denotes the reward for completing the job. Note that $w_i\in \mathbb{N}$.
+    \item[$\ell_i$] which denotes the penalty for no completing a job, where $\ell_i \in \mathbb{N}$.   
+\end{itemize}
+
+We denote the set of the jobs with these definitions as 
+\begin{equation}
+    J = \{
+        \left (i, r_i, d_i, p_i, w_i, \ell_i \right ) \mid \forall i \in N
+    \} \ .
+\end{equation}
+
+With this theorem, we aim to prove that rewriting the reward as $\hat{w}_i := w_i + \ell_i$ allows us to find the same optimal schedule without requiring to consider the penalty $\ell_i$ additionally.
+
+Hence, we define the new schedule as
+\begin{equation}
+    \hat{J} = \{
+        \left (i, r_i, d_i, p_i, \hat{w}_i, 0 \right ) \mid \forall i \in N
+    \} \ .
+    \label{eq:hat_J}
+\end{equation}
+
+We define a schedule as a set of tuples denoting which job is scheduled at what timesetep. Formally, we have
+\begin{equation}
+    S := \{
+        (t_i, j) \mid t_i \in [1, T], j\in N
+    \}
+\end{equation} 
+where $(t, j)\in S \Rightarrow (t, i) \notin S$ for all $i\in N$ with $i\neq j$. Moreover, we implictely denote $t\in [1, T] \Rightarrow \exists (t, j)\in S$ for an arbitrary $j\in N$.
+
+Moreover, we define a scheduler $\Psi: J \rightarrow S$ as a function that maximizes the overall reward of the produced schedule $S$. For that, we denote a function $\mathcal{L}: S \rightarrow \mathbb{Z}$ that computes the score for each schedule. Formally, the scoring function is defined as 
+\begin{equation}
+    \mathcal{L}(S) := \sum_{j \in N} 
+    \begin{cases}
+    w_i \quad  &\text{if } |S \cap \{(t, j) \mid t\in [1, T]\}| \geq p_i \\
+    -\ell_i &\text{otherwise}
+    \end{cases} \ .
+    \label{eq:scoring}
+\end{equation}
+Finally, we have 
+\begin{equation}
+    \Psi^*(J) := \max_\Psi \mathcal{L}(\Psi(J)) \ .
+    \label{eq:scheduler}
+\end{equation}
+
+\begin{theorem}
+    The score of the optimal schedule using the rewritten reward is equal to the reward of the optimal schedule optimized using the reward and penalty explicitely. 
+    Formally, we have $\mathcal{L}(\Psi(\hat{J})) = \mathcal{L}(\Psi({J}))$.
+\end{theorem}
+
+\begin{proof}
+
+
+\end{proof}
+
+\begin{theorem}
+    $\Psi(J) = \Psi(\hat{J})$.
+\end{theorem}
+
+\begin{proof}
+
+    % Let us denote as $F\subseteq N$ the set of all successfully completed jobs, i.e. 
+    % \begin{equation}
+    %     F := \{
+    %         i\in N \mid |S \cap \{(t, i) \mid t\in [1, T]\}| \geq p_i
+    %     \} \ .
+    % \end{equation}
+
+    % We can now rewrite $\mathcal{L}$ as 
+    % \begin{equation}
+    %     \mathcal{L}(S) = \sum_{j \in F} w_i - \sum_{j\in N \setminus F} \ell_i
+    % \end{equation}
+    
+    % We therefore have 
+    % \begin{align*}
+    %     \mathcal{L}(\Psi(J)) &= \sum_{j \in F} w_i - \sum_{j\in N \setminus F} \ell_i \\
+    %     &= 
+    % \end{align*}
+
+    Let us show this by a proof by contradiction. 
+
+    Let us assume that there is a non-empty schedule $S = \Psi(J)$ and a non-empty schedule $\hat{S} = \Psi (\hat{J})$ with $\mathcal{L}(S) > \mathcal{L}(\hat{S})$. 
+    Let us further assume that 
+    \begin{equation}
+        \exists (t, j) \in S \Rightarrow (t, j)\notin \hat{S} \ .
+        \label{eq:implication}
+    \end{equation} 
+    By definition, because $J$ and $\hat{J}$ have the same amount of jobs, we have $|S| = |\hat{S}|$. 
+    Hence, if there is a difference between both schedules, it would be found by Equation~\ref{eq:implication}.
+
+    Let us assume, without loss of generality,\!\footnote{Is this true?} that there exists only one element $(t, j)\in S$ such that Equation~\ref{eq:implication} holds.
+    Then at time step $t$, we know that $(t, i)\in \hat{S}$ where $i\neq j$. Because $(t, j)\in S \land (t, i)\notin S$, we know that $w_j \geq w_i$
+
+
+    \textbf{Idea:} show this for the simpler problem (where no job spliting is allowed) and then somehow show that it also holds on the problem with pauses. 
+
+    Then, because it holds on the case without push-back, we can imply that the same argument can be used for the case where pushbacks are allowed.
+
+\end{proof}
+
+\begin{proof}
+
+    Let us consider the decision of 
+
+\end{proof}
+
+\begin{theorem}
+    For every job $i\in N$ with monotonically increasing cost function $f_i: \mathbb{N} \rightarrow \mathbb{N}$, there exists a timestep $t^*$ such that $f_i(t^*-1) < w_i$ and $f_i(t^*) \geq w_i$.  
+\end{theorem}
+
+\begin{proof}
+
+We can assume that $f_i$ is monotonically increasing. Hence, we have that $f_i(t) \geq f_i(t+1)$ for all $t\in \mathbb{N}$.
+% By definition of an increasing function, there exists a 
+We use the well-ordering principle, which states that every non-empty subset of the nonnegative integers contains a least element, to show that such a $t^*$ exists. Let us denote the set 
+\begin{equation}
+    G_{w_i} = \{t\in \mathbb{N} \mid f_i(t) \geq w_i\}
+\end{equation}
+which denotes all the values for which $f_i$ produces values greater or equal to $w_i$. 
+Because $f_i$ is unbounded, we have that $G_{w_i} \neq \emptyset$ for any $w_i \in \mathbb{N}$.
+
+From the well-ordering principle, we know that there exists a least element $t^* \in G_{w_i}$ such that $\forall t' \in G_{w_i} t^* < t'$ with $t^* \neq t'$.
+Because $t^*$ is the least element of $G_{w_i}$, we know that $f_i(t^* - 1) \leq w_i$ and $f_i (t^*)$.
+
+\end{proof}
+
+\section{Simplified Problem}
+
+Let us first consider the problem of finding an optimal schedule for a set of $n$ jobs, which we represent as a set $N = \{1, \dots, n\}$.
+Each job has the following properties:
+\begin{itemize}
+    \item[$r_i$] which denotes the release time of the job.
+    \item[$d_i$] which denotes the deadline of the job. Note that $d_i > r_i$.
+    \item[$p_i$] which denotes the processing time of the job.
+    \item[$w_i$] which denotes the reward for completing the job. Note that $w_i\in \mathbb{N}$.
+    \item[$\ell_i$] which denotes the penalty for no completing a job, where $\ell_i \in \mathbb{N}$.   
+\end{itemize}
+and can neither be split into multiple parts, nor be pushed back.
+
+Let us now define a schedule as a set of tuples $(t, i)$ denoting that the $i$-th job is scheduled in the $t$-th position.
+Formally, we have
+\begin{equation}
+    S' = \{(t, i) \mid t\in [1, T], i\in N\}
+\end{equation}
+where $(t, i)\in S' \Rightarrow (t, j)\notin S'$ for all $i\neq j$. Moreover, we implictly denote $t\in [1, T] \Rightarrow \exists (t, i)\in S'$ for an arbitrary $i\in N$.
+
+The scoring function of a schedule is defined the same way as in Equation~\ref{eq:scoring}. The scheduler $\Psi' : J \rightarrow S'$ is defined the same way as in Equation~\ref{eq:scheduler}.
+
+Let us now consider the case where we rewrite the reward as $\hat{w}_i := w_i + \ell_i$, i.e. $\hat{J}$ as defined in Equation~\ref{eq:hat_J}.
+
+\begin{theorem}
+    The scheduler $\Psi' : J \rightarrow S'$ produces schedules with the same scores for $J$ and $\hat{J}$. Formally, we have $\mathcal{L}(\Psi'(J)) = \mathcal{L}(\Psi'(\hat{J}))$.
+\end{theorem}
+
+\begin{proof}
+
+    Let us show this by a proof by contradiction. 
+
+    Let $S = \Psi'(J)$ and ${S}' = \Psi'(\hat{J})$ with $\mathcal{L}(S) > \mathcal{L}({S}')$. 
+    We can now define the set of all the scheduled jobs scheduled in $S$ that are not presend in ${S}'$ as 
+    \begin{equation*}
+        D = \{(t, i) \mid (t, i)\in S \Rightarrow (t, i)\notin {S}'\} \ .
+    \end{equation*}
+    Note that $\mathcal{L}(S) > \mathcal{L}(\hat{S})$ is required as there exists schedules with the same score but with $|D| > 0$. 
+
+    Let us now first consider the case where $|D| = 1$.
+    Then we know that $S$ schedules the job $i$ with $w_i$ and $\ell_i$, whereas ${S}'$ schedules the job $j$ with $\hat{w}_j$ and $\ell_j$.
+    From $|D|=1$, we know that scheduling the job $i$ and $j$ are the only two differences between $S$ and ${S}'$.
+
+    Because $S$ is the optimal schedule and that $\mathcal{L}(S) > \mathcal{L}({S}')$, we know that $w_i + \ell_i > \hat{w}_j + \ell_j$. 
+    While $\Psi'(\hat{J})$ optimizes the schedule such that the score is maximized, we have an instance where $\Psi'(\hat{J})$ chose to schedule the job $j$ instead of the job $i$, with $\hat{w}_j < w_i$.
+    This contradicts the maximization of the score for $\hat{J}$.
+    
+\end{proof}
+
+\begin{proof}
+
+    Let $S = \Psi'(J)$ and ${S}' = \Psi'(\hat{J})$ with $\mathcal{L}(S) > \mathcal{L}({S}')$. 
+    We denote the set of all successfully scheduled jobs as $F\subseteq N$ with 
+    \begin{equation*}
+        F = \{i\in N \mid |S \cap \{(t, i) \mid t\in [1, T]\}| \geq p_i\}
+    \end{equation*}
+
+\end{proof}
+
+
+\begin{theorem}
+    If a schedule $S = \Psi(J)$ is optimal, then $S'=\Psi'(J')$ is also optimal. 
+\end{theorem}

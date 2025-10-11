@@ -1,0 +1,53 @@
+\begin{thebibliography}{}
+
+\bibitem[Calinescu et~al., 2024]{calinescu2024online}
+Calinescu, G., Davies, S., Khuller, S., and Zhang, S. (2024).
+\newblock Online flexible busy time scheduling on heterogeneous machines.
+\newblock {\em arXiv preprint arXiv:2402.11109}.
+
+\bibitem[Epstein and Levin, 2016]{epstein2016benefit}
+Epstein, L. and Levin, A. (2016).
+\newblock The benefit of preemption for single machine scheduling so as to minimize total weighted completion time.
+\newblock {\em Operations Research Letters}, 44(6):772--774.
+
+\bibitem[J{\"a}ger et~al., 2025]{jager2025competitive}
+J{\"a}ger, S., Sagnol, G., Schmidt~genannt Waldschmidt, D., and Warode, P. (2025).
+\newblock Competitive kill-and-restart and preemptive strategies for non-clairvoyant scheduling.
+\newblock {\em Mathematical Programming}, 210(1):457--509.
+
+\bibitem[Keyvanshokooh et~al., 2021]{keyvanshokooh2021online}
+Keyvanshokooh, E., Shi, C., and Van~Oyen, M.~P. (2021).
+\newblock Online advance scheduling with overtime: A primal-dual approach.
+\newblock {\em Manufacturing \& Service Operations Management}, 23(1):246--266.
+
+\bibitem[Kim and Chwa, 2003]{kim2003non}
+Kim, J.-H. and Chwa, K.-Y. (2003).
+\newblock Non-clairvoyant scheduling for weighted flow time.
+\newblock {\em Information processing letters}, 87(1):31--37.
+
+\bibitem[Kleinrock, 1964]{kleinrock1964analysis}
+Kleinrock, L. (1964).
+\newblock Analysis of a time-shared processor.
+\newblock {\em Naval research logistics quarterly}, 11(1):59--73.
+
+\bibitem[Lee et~al., 1997]{lee1997heuristic}
+Lee, Y.~H., Bhaskaran, K., and Pinedo, M. (1997).
+\newblock A heuristic to minimize the total weighted tardiness with sequence-dependent setups.
+\newblock {\em IIE transactions}, 29(1):45--52.
+
+\bibitem[Motwani et~al., 1994]{motwani1994nonclairvoyant}
+Motwani, R., Phillips, S., and Torng, E. (1994).
+\newblock Nonclairvoyant scheduling.
+\newblock {\em Theoretical computer science}, 130(1):17--47.
+
+\bibitem[Sitters, 2010]{sitters2010competitive}
+Sitters, R. (2010).
+\newblock Competitive analysis of preemptive single-machine scheduling.
+\newblock {\em Operations Research Letters}, 38(6):585--588.
+
+\bibitem[Vepsalainen and Morton, 1987]{vepsalainen1987priority}
+Vepsalainen, A.~P. and Morton, T.~E. (1987).
+\newblock Priority rules for job shops with weighted tardiness costs.
+\newblock {\em Management science}, 33(8):1035--1047.
+
+\end{thebibliography}
